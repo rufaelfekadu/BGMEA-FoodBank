@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run lint",
     "lint": "eslint .",
-    "start": "node app.js --port 8080",
+    "start": "node app.js",
     "dev": "nodemon app.js -e html,css,js,ejs"
   },
   "keywords": [
@@ -30,7 +30,6 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "eslint": "^8.54.0",
     "nodemon": "^2.0.15"
   }
