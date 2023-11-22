@@ -6,8 +6,8 @@ const connectDB = async() => {
 	try{
 	
 	// get connection uri from aws parameter store and wait for it to be retrieved
-	// const value = await awsUtils.getParameter('Database-uri-store')
-	const value = "mongodb://User4:zerowastenomads@docdb-2023-11-22-17-01-20.cj4ax3bxarjc.us-east-1.docdb.amazonaws.com:27017/?retryWrites=false";
+	const value = await awsUtils.getParameter('Database-uri-store')
+	// const value = "mongodb://User4:zerowastenomads@docdb-2023-11-22-17-01-20.cj4ax3bxarjc.us-east-1.docdb.amazonaws.com:27017/?retryWrites=false";
 	console.log('Retrieved value:', value);
 	await mongoose.connect(value);
 	console.log("MongoDB connected...");
