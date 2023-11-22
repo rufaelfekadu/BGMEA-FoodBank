@@ -17,7 +17,7 @@
   "author": "aayush",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.1501.0",
+    "aws-sdk": "^2.1502.0",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "dotenv": "^10.0.0",
