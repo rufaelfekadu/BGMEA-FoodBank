@@ -6,7 +6,7 @@ const connectDB = async() => {
 	try{
 	
 	// get connection uri from aws parameter store and wait for it to be retrieved
-	const value = await awsUtils.getParameter('atlas-db-uri')
+	const value = await awsUtils.getParameter('Database-uri-store')
 	console.log('Retrieved value:', value);
 	await mongoose.connect(value);
 	console.log("MongoDB connected...");
