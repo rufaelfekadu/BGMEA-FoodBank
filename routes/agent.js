@@ -58,19 +58,24 @@ router.get("/agent/collection/view/:collectionId", middleware.ensureAgentLoggedI
 });
 
 router.get("/agent/collection/collect/:collectionId", middleware.ensureAgentLoggedIn, async (req,res) => {
-	try
-	{
+	
+	try {
 		const collectionId = req.params.collectionId;
-		await Donation.findByIdAndUpdate(collectionId).then({ status: "collected", collectionTime: Date.now() });
+		await Donation.findByIdAndUpdate(
+		  collectionId,
+		  { status: "collected", collectionTime: Date.now() },
+		  { new: true } // To get the updated document as a result
+		).exec();
+	  
+		console.log("Donation collected");
 		req.flash("success", "Donation collected successfully");
 		res.redirect(`/agent/collection/view/${collectionId}`);
-	}
-	catch(err)
-	{
-		console.log(err);
-		req.flash("error", "Some error occurred on the server.")
+	  } catch (error) {
+		console.error("Error updating donation:", error);
 		res.redirect("back");
-	}
+		// Handle the error appropriately
+	  }
+	
 });
 
 
