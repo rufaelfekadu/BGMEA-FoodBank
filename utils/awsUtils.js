@@ -12,4 +12,16 @@ const getParameter = async (parameterName) => {
   }
 };
 
-module.exports = { getParameter };
+// Configure AWS SDK for Rekognition
+const rekognition = new AWS.Rekognition({
+  region: process.env.AWS_REGION,
+});
+
+// Configure AWS SDK for S3
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+});
+
+module.exports = { getParameter, rekognition, s3 };

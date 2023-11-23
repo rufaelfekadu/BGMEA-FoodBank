@@ -7,3 +7,4 @@ package-lock.json
 !.elasticbeanstalk/*.global.yml
 .ebextensions/*
 .DS_Store/*
+uploads/*

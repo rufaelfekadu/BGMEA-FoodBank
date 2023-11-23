@@ -44,6 +44,9 @@ const donationSchema = new mongoose.Schema({
 		enum: ["pending", "rejected", "accepted", "assigned", "collected"],
 		required: true
 	},
+  image: {
+    type: String, 
+  },
 });
 
 const Donation = mongoose.model("donations", donationSchema);

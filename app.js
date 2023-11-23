@@ -10,6 +10,8 @@ const authRoutes = require("./routes/auth.js");
 const adminRoutes = require("./routes/admin.js");
 const donorRoutes = require("./routes/donor.js");
 const agentRoutes = require("./routes/agent.js");
+const {s3} = require("./utils/awsUtils.js");
+
 require("dotenv").config();
 require("./config/dbConnection.js")();
 require("./config/passport.js")(passport);
@@ -18,7 +20,29 @@ require("./config/passport.js")(passport);
 
 app.set("view engine", "ejs");
 app.use(expressLayouts);
-app.use("/assets", express.static(__dirname + "/assets"));
+
+// app.use("/assets", express.static(__dirname + "/assets"));
+const bucketName = 'staticfile-store';
+
+// Middleware to serve static files from /assets folder in S3
+app.use('/assets', (req, res) => {
+  const key = req.originalUrl.replace('/assets', 'assets');
+  // Example: If request is /static/image.jpg, key becomes assets/image.jpg
+  const params = {
+    Bucket: bucketName,
+    Key: key,
+  };
+
+  s3.getObject(params)
+    .createReadStream()
+    .on('error', (err) => {
+      console.error('Error fetching file from S3:', err);
+      res.status(404).send('File not found');
+    })
+    .pipe(res);
+});
+
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({
@@ -37,8 +61,6 @@ app.use((req, res, next) => {
 	res.locals.warning = req.flash("warning");
 	next();
 });
-
-
 
 // Routes
 app.use(homeRoutes);

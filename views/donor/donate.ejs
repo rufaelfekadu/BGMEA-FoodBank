@@ -7,7 +7,7 @@
 			<h5 class="m-0 color-theme d-inline-block">Donate</h5>
 		</div>
 		
-		<form action="/donor/donate" method="POST" class="border m-4 my-3 p-4 bg-white rounded-2 shadow">
+		<form action="/donor/donate" method="POST" enctype="multipart/form-data" class="border m-4 my-3 p-4 bg-white rounded-2 shadow">
 			<div class="mb-4">
 				<label for="food" class="form-label">Food type</label>
 				<input type="text" name="donation[foodType]" class="form-control" id="food" placeholder="Enter food.." required autofocus>
@@ -40,6 +40,11 @@
 							<!-- Add more cities here if needed -->
 						  </select>
 					</div>
+					<div class="mb-4 col-sm-8">
+						<label for="donationImage" class="form-label">Image</label>
+						<input type="file" name="donationImage" accept="image/*" >
+					</div>
+				</div>
 
 					<div class="row">
 						<div class="mb-4 col-sm-8">
