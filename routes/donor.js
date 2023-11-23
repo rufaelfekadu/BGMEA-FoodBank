@@ -71,21 +71,39 @@ router.post("/donor/donate", middleware.ensureDonorLoggedIn, upload.single('dona
 		) {
 		  status = "pending";
 		  req.flash("warning", "Donation request sent for further inspection");
-		} else if (healthfoods.includes(rekognitionResponse.CustomLabels[0].Name)) {
-		  status = "accepted";
-		  req.flash("success", "Donation request sent successfully. Assigning an agent to collect the donation.");
-  
-		  // logic to assign agent
-		  const agents = await User.find({ role: "agent" });
-		  const agent = agents[Math.floor(Math.random() * agents.length)];
-  
-		  if (!agent) {
+		} 
+		else if (healthfoods.includes(rekognitionResponse.CustomLabels[0].Name)) {
+
 			status = "accepted";
-			req.flash("error", "No agent available to collect the donation at this time. The admin will assign an agent soon.");
-		  } else {
-			status = "assigned";
-			agentId = agent._id;
-		  }
+			// req.flash("success", "Donation request sent successfully. Assigning an agent to collect the donation.");
+  
+		//   // logic to assign agent
+		//   const agents = await User.find({ role: "agent" });
+		//   const agent = agents[Math.floor(Math.random() * agents.length)];
+
+			// Logic to find an available, unassigned agent
+			const assignedAgents = await Donation.find({ agent: { $ne: null } }).distinct('agent');
+			const availableAgents = await User.find({ role: "agent", _id: { $nin: assignedAgents } });
+
+			if (availableAgents.length === 0) {
+				// No available agents found
+				status = "accepted";
+				req.flash("error", "No agent available to collect the donation at this time. The admin will assign an agent soon.");
+			} else {
+				// Assign an available agent
+				const randomIndex = Math.floor(Math.random() * availableAgents.length);
+				const agent = availableAgents[randomIndex];
+				status = "assigned";
+				agentId = agent._id;
+			}
+  
+		//   if (!agent) {
+		// 	status = "accepted";
+		// 	req.flash("error", "No agent available to collect the donation at this time. The admin will assign an agent soon.");
+		//   } else {
+		// 	status = "assigned";
+		// 	agentId = agent._id;
+		//   }
 		} else {
 		  status = "rejected";
 		  req.flash("error", "Donation request rejected. Please donate only healthy food items.");

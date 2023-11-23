@@ -37,7 +37,7 @@ app.use('/assets', (req, res) => {
     .createReadStream()
     .on('error', (err) => {
       console.error('Error fetching file from S3:', err);
-      res.status(404).send('File not found');
+      // res.status(404).send('File not found');
     })
     .pipe(res);
 });
