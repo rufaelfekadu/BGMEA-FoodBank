@@ -11,6 +11,7 @@ const adminRoutes = require("./routes/admin.js");
 const donorRoutes = require("./routes/donor.js");
 const agentRoutes = require("./routes/agent.js");
 const {s3} = require("./utils/awsUtils.js");
+const path = require('path');
 
 require("dotenv").config();
 require("./config/dbConnection.js")();
@@ -23,7 +24,7 @@ app.use(expressLayouts);
 
 // app.use("/assets", express.static(__dirname + "/assets"));
 const bucketName = 'staticfile-store';
-
+app.use('/.well-known/pki-validation', express.static(path.join(__dirname, '.well-known', 'pki-validation')));
 // Middleware to serve static files from /assets folder in S3
 app.use('/assets', (req, res) => {
   const key = req.originalUrl.replace('/assets', 'assets');
