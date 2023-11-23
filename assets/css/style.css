@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 :root {
-  --theme-color: #5F6F52;
+  --theme-color:rgb(182,196,113);
 }
 
 body {
@@ -33,9 +33,9 @@ header .nav-link:hover {
 
 header .user-icon {
   padding: 0.4rem;
-  color: white !important;
+  color: black !important;
   border-radius: 50%;
-  border: 2px solid white;
+  border: 2px solid black;
   width: 40px;
   text-align: center;
 }
@@ -153,4 +153,13 @@ header .navbar-toggler:focus {
   to {
     right: 0px;
   }
+}
+.rounded-box {
+  transition: transform 0.3s ease-in-out;
+  border-radius: 65px; /* Adjust the value for more or less curvature */
+  /* Ensure the content doesn't overflow rounded corners */
+}
+
+.rounded-box:hover {
+  transform: scale(1.05);
 }

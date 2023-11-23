@@ -1,8 +1,58 @@
-<h1 class="m-4">About us</h1>
-	
-<div class="bg-white m-4 p-4 shadow">
-	<ul class="fs-5">
-		<li>At Food Bank, we help donors provide food to who need it across the country.</li>
-		<li>Our main aim is to help others and spread the joy and draw the smiles on people's faces.</li>
-	</ul>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+  
+  .gif-container {
+            position: fixed;
+            top: 65%; /* Adjust the distance from the bottom */
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 230px; /* Adjust the size of the gif container */
+            max-height: 230px; /* Adjust the size of the gif container */
+            margin: 0 4% 4% 0; /* Adjust the margin */
+        }
+
+        .gif-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px; /* Adjust the border-radius for a rounded look */
+        }
+        h1 {
+            margin: 4%;
+        }
+
+        .content-container {
+            background: white;
+            margin: 4%;
+            padding: 4%;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1; /* Ensure it's below the gif container */
+            position: relative;
+        }
+    </style>
+    <title>About Us</title>
+</head>
+
+<body>
+
+    <h1>About us</h1>
+
+    <div class="content-container">
+        <ul class="fs-5">
+            <li>At Food Bank, we help donors provide food to those who need it across the country.</li>
+            <li>Our main aim is to help others and spread joy by drawing smiles on people's faces.</li>
+        </ul>
+    </div>
+
+    <div class="gif-container">
+        <img src="/assets/images/fruits111-unscreen.gif" alt="gif">
+    </div>
+
+</body>
+
+</html>
